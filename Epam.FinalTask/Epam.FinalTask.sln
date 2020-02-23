@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29509.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PL", "PL", "{F2E8C391-F0FD-4DBC-9AC7-2FD4FEB2A077}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BLL", "BLL", "{48013E48-30B5-45AC-9227-DFF66658EE9D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DAL", "DAL", "{6E9C88F2-FCC5-497F-A50F-F101DF1EA0B0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Entities", "Entities", "{655F159B-BD55-4CD8-BB1F-0791472D2DB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{88572CE3-8A72-448B-B4D5-7D0ECBAAEAD4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalContracts", "DalContracts\DalContracts.csproj", "{6E012168-8D93-4048-ABBB-09F16C139496}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicContracts", "LogicContracts\LogicContracts.csproj", "{9D542112-8EB8-4E9E-B8A8-60AF9CCAC7CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loc", "Loc\Loc.csproj", "{7C68C698-36EF-4463-9094-267D5903302B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebPL", "WebPL\WebPL.csproj", "{12D20772-E786-46AF-AA10-C71EF6D21706}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{88572CE3-8A72-448B-B4D5-7D0ECBAAEAD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88572CE3-8A72-448B-B4D5-7D0ECBAAEAD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88572CE3-8A72-448B-B4D5-7D0ECBAAEAD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88572CE3-8A72-448B-B4D5-7D0ECBAAEAD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E012168-8D93-4048-ABBB-09F16C139496}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E012168-8D93-4048-ABBB-09F16C139496}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E012168-8D93-4048-ABBB-09F16C139496}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E012168-8D93-4048-ABBB-09F16C139496}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D542112-8EB8-4E9E-B8A8-60AF9CCAC7CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D542112-8EB8-4E9E-B8A8-60AF9CCAC7CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D542112-8EB8-4E9E-B8A8-60AF9CCAC7CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D542112-8EB8-4E9E-B8A8-60AF9CCAC7CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C68C698-36EF-4463-9094-267D5903302B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C68C698-36EF-4463-9094-267D5903302B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C68C698-36EF-4463-9094-267D5903302B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C68C698-36EF-4463-9094-267D5903302B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12D20772-E786-46AF-AA10-C71EF6D21706}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12D20772-E786-46AF-AA10-C71EF6D21706}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12D20772-E786-46AF-AA10-C71EF6D21706}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12D20772-E786-46AF-AA10-C71EF6D21706}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{88572CE3-8A72-448B-B4D5-7D0ECBAAEAD4} = {655F159B-BD55-4CD8-BB1F-0791472D2DB0}
+		{6E012168-8D93-4048-ABBB-09F16C139496} = {6E9C88F2-FCC5-497F-A50F-F101DF1EA0B0}
+		{9D542112-8EB8-4E9E-B8A8-60AF9CCAC7CD} = {48013E48-30B5-45AC-9227-DFF66658EE9D}
+		{12D20772-E786-46AF-AA10-C71EF6D21706} = {F2E8C391-F0FD-4DBC-9AC7-2FD4FEB2A077}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CDF5AC06-9931-46F5-B90B-321DDCA412CC}
+	EndGlobalSection
+EndGlobal
