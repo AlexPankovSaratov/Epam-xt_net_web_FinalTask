@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities
+namespace LogicContracts
 {
-    class Program
+    public interface IPhotoLogic
     {
-        static void Main(string[] args)
-        {
-        }
+
     }
 }

@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace LogicContracts
 {
-    class Program
+    public interface IUserLogic
     {
-        static void Main(string[] args)
-        {
-        }
+
     }
 }

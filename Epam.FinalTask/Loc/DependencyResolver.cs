@@ -8,8 +8,6 @@ namespace Loc
 {
     class DependencyResolver
     {
-        static void Main(string[] args)
-        {
-        }
+
     }
 }
