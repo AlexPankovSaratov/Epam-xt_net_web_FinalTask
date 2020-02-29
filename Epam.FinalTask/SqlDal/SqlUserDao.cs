@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SqlDal
 {
-    class SqlUserDao : IUserDao
+    public class SqlUserDao : IUserDao
     {
         private string conStr = ConfigurationManager.ConnectionStrings["db"].ConnectionString;
 

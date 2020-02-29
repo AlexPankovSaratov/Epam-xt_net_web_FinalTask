@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SqlDal
 {
-    class SqlPhotoDao : IPhotoDao
+    public class SqlPhotoDao : IPhotoDao
     {
         private string conStr = ConfigurationManager.ConnectionStrings["db"].ConnectionString;
 
@@ -118,8 +118,14 @@ namespace SqlDal
                     }
                     if (photo == null)
                     {
-                        photo = new Photo { Id = (int)sqlDataReader["Id"], Country = (string)sqlDataReader["Country"], Title = (string)sqlDataReader["Title"],
-                        AuthorId = (int)sqlDataReader["AuthorId"], Image = Convert.FromBase64String((string)sqlDataReader["Image"]) };
+                        photo = new Photo
+                        {
+                            Id = (int)sqlDataReader["Id"],
+                            Country = (string)sqlDataReader["Country"],
+                            Title = (string)sqlDataReader["Title"],
+                            AuthorId = (int)sqlDataReader["AuthorId"],
+                            Image = Convert.FromBase64String((string)sqlDataReader["Image"])
+                        };
                     }
                 }
                 photo.LikeUsersList = LikeUsersList;

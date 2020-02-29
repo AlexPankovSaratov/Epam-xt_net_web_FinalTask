@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7C68C698-36EF-4463-9094-267D5903302B}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{3FFEF5E3-DCBD-418D-AF06-63CD40B1E229}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Loc</RootNamespace>
     <AssemblyName>Loc</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -47,7 +45,22 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <ProjectReference Include="..\DalContracts\DalContracts.csproj">
+      <Project>{7C881BF9-3108-4885-AB09-C19CF5A07CCF}</Project>
+      <Name>DalContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LogicContracts\LogicContracts.csproj">
+      <Project>{FFD4476B-D2CB-420E-B2CA-C45232FB1243}</Project>
+      <Name>LogicContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Logic\Logic.csproj">
+      <Project>{CFBC3625-B271-47AB-ADB9-A34D7064D5B7}</Project>
+      <Name>Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SqlDal\SqlDal.csproj">
+      <Project>{2DA836FE-F47B-4335-ACA0-8D56D07BD6C9}</Project>
+      <Name>SqlDal</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
