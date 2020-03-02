@@ -3,7 +3,6 @@
 @using Loc;
 @{
     Layout = "~/Layouts/_MainLayout.cshtml";
-    PageData["Title"] = "My album";
     IEnumerable<Photo> AllPhoto = DependencyResolver.PhotoLogic.GetAllPhoto();
     int Like = 0;
     int UserId = MyRoleProvider.GetUserId(User.Identity.Name);
@@ -13,8 +12,29 @@
         DependencyResolver.PhotoLogic.LikePhoto(Like, UserId);
     }
 }
-<h1>All user photos</h1>
-@foreach (Photo item in AllPhoto)
+<h1>Search photo</h1>
+
+<div class="input-group col-md-3 mb-3">
+    <select class="custom-select" id="inputGroupSelect02">
+        <option value="1">Country</option>
+        <option value="2">Author username</option>
+    </select>
+    <div class="input-group-append">
+        <label class="input-group-text" for="inputGroupSelect02">Search by</label>
+    </div>
+</div>
+
+<div class= "input-group col-md-3 mb-3">
+    <select class="custom-select" id="inputGroupSelect02">
+        <option value="1">Likes</option>
+        <option value="2">Upload date</option>
+    </select>
+    <div class="input-group-append">
+        <label class="input-group-text" for="inputGroupSelect02">Sort by</label>
+    </div>
+</div>
+
+@*@foreach (Photo item in AllPhoto)
 {
     <div class="photo">
         @item.Title
@@ -31,6 +51,6 @@
             }
         </div>
     </div>
-}
+}*@
 
 

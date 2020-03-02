@@ -1,8 +1,31 @@
-﻿@{
+﻿@using Epam.FinalTask;
+@using Loc;
+@{
+    string Login = null, RoleName = null;
     Layout = "~/Layouts/_MainLayout.cshtml";
     PageData["Title"] = "Travel album";
+    Login = Request["Login"];
+    RoleName = Request["RoleName"];
+    if (IsPost && Login != "" && RoleName != "")
+    {
+        int UserId = MyRoleProvider.GetUserId(Login);
+        DependencyResolver.UserLogic.AddUserRole(UserId, RoleName);
+    }
 }
     <div class="heading container">
-        <h1>Welcome to the fёirst travel album in the universe!</h1>
+        <h1>Add user role</h1>
+        <form method="post" action="~/Pages/AdminSettings.cshtml">
+            <div class="form-row was-validated">
+                <div class="col-md-3 mb-3">
+                    <label for="validationServer01">User login</label>
+                    <input type="text" class="form-control" id="validationServer01" placeholder="Enter username" required name="Login" value=@Login>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="validationServer02">Role name</label>
+                    <input type="text" class="form-control" id="validationServer02" placeholder="Enter role name" required name="RoleName" value=@RoleName>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-outline-light">Add</button>
+        </form>
     </div>
 

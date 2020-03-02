@@ -51,7 +51,7 @@ namespace LogicContracts
             {
                 if (item == LikedUserId) UserInArray = true;
             }
-            if (UserInArray) return _photoDao.LikePhoto(PhotoId, LikedUserId);
+            if (!UserInArray) return _photoDao.LikePhoto(PhotoId, LikedUserId);
             else return _photoDao.RemoveLikePhoto(PhotoId, LikedUserId);
         }
 

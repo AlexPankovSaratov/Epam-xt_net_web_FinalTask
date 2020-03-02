@@ -49,13 +49,13 @@
       <Project>{7C881BF9-3108-4885-AB09-C19CF5A07CCF}</Project>
       <Name>DalContracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LogicContracts\LogicContracts.csproj">
+    <ProjectReference Include="..\LogicContracts\Logic.csproj">
       <Project>{FFD4476B-D2CB-420E-B2CA-C45232FB1243}</Project>
-      <Name>LogicContracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Logic\Logic.csproj">
-      <Project>{CFBC3625-B271-47AB-ADB9-A34D7064D5B7}</Project>
       <Name>Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Logic\LogicContracts.csproj">
+      <Project>{CFBC3625-B271-47AB-ADB9-A34D7064D5B7}</Project>
+      <Name>LogicContracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\SqlDal\SqlDal.csproj">
       <Project>{2DA836FE-F47B-4335-ACA0-8D56D07BD6C9}</Project>

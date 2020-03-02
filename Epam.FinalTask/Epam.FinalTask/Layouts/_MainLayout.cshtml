@@ -15,36 +15,57 @@
     <title>>@PageData["Title"]</title>
 </head>
 <body>
-    <div>
-        <nav class="navbar navbar-expand-lg navbar-dark">
-            <a class="navbar-brand" href="~/index.cshtml">Menu</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="~/Pages/MyAlbum.cshtml">My Album</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Photos of all users
-                        </a>
-                        <div class="dropdown-menu alert-dark" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">View all photos</a>
-                            <a class="dropdown-item" href="#">Search photo</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <a href="~/Pages/AdminSettings.cshtml" class="btn btn-outline-light btn-sm" role="button" aria-pressed="true">Admin Settings</a>
-        </nav>
-    </div>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div>
+            <nav class="navbar navbar-expand-lg navbar-dark">
+                <a class="navbar-brand" href="~/index.cshtml">Menu</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        @if (@User.Identity.Name != "")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="~/Pages/MyAlbum.cshtml">My Album</a>
+                            </li>
+                        }
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Photos of all users
+                            </a>
+                            <div class="dropdown-menu alert-dark" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="~/Pages/AllPhoto">View all photos</a>
+                                <a class="dropdown-item" href="~/Pages/SearchPhoto">Search photo</a>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="rightMenu">
+                        @if (@User.Identity.Name == "")
+                        {
+                            <a class="navbar-brand">User: Guest</a>
+                        }
+                        else
+                        {
+                            <a class="navbar-brand">User: @User.Identity.Name</a>
+                        }
+                        <a href="~/Pages/SignOut.cshtml" id="btn_signout" class="button btn btn-outline-light btn-sm" role="button" aria-pressed="true">Sign out</a>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a href="~/Pages/AdminSettings.cshtml" class="button btn btn-outline-light btn-sm" role="button" aria-pressed="true">Admin Settings</a>
+                        }
+                    </div>
+                </div>
+            </nav>
+        </div>
+    }
+
     <div class="content">
         @RenderBody()
     </div>
+    <script src="~/MyScript/MainJS.js"></script>
     <script src="~/Scripts/jquery-3.4.1.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
-    <script src="~/MyScript/MainJS.js"></script>
 </body>
 </html>

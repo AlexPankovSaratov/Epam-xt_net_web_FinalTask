@@ -1,25 +1,48 @@
 ﻿body {
     background: url(../Images/backgroundImage.jpg) top;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 1.4px;
+    font-style: italic;
 }
 .content {
+    margin-top: 30px;
     background: rgba(0, 0, 0, 0.63);
-    color: rgba(255, 255, 255, 0.69);
     padding: 40px 20px;
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    letter-spacing: 1.4px;
+    color: rgba(255, 255, 255, 0.69);
     font-size: 20px;
 }
 .navbar {
     background: rgba(0, 0, 0, 0.63);
-    margin: 20px 0px;
+    margin-top: 30px;
     border: hidden;
     border-width: 1px;
     border-color: rgb(255, 255, 255);
 }
 h1 {
-    font-family: 'Playfair Display', serif;
+    color: rgba(255, 255, 255, 0.69);
     font-style: italic;
     letter-spacing: 1.4px;
     text-align: center;
+}
+.button {
+    margin-left: 5px;
+}
+.file {
+    font-size: 16px;
+    margin-left: 2px;
+    margin-top: 38px;
+}
+.rightMenu {
+    margin-left: auto;
+    margin-right: 0;
+}
+.photo {
+    overflow: inherit;
+    display: inline-block;
+    border: 1px solid white;
+    padding: 10px;
+    margin-top: 10px;
+}
+.photoButton {
+    display: inline-block;
 }

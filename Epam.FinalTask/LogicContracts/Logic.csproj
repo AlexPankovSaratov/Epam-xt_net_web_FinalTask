@@ -54,9 +54,9 @@
       <Project>{C698CFC9-7185-4ED7-90EB-C936B455F725}</Project>
       <Name>Entities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Logic\Logic.csproj">
+    <ProjectReference Include="..\Logic\LogicContracts.csproj">
       <Project>{CFBC3625-B271-47AB-ADB9-A34D7064D5B7}</Project>
-      <Name>Logic</Name>
+      <Name>LogicContracts</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

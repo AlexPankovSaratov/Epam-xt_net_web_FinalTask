@@ -126,6 +126,8 @@
     <Content Include="Pages\AllPhoto.cshtml" />
     <Content Include="Pages\Login.cshtml" />
     <Content Include="Pages\MyAlbum.cshtml" />
+    <Content Include="Pages\SignOut.cshtml" />
+    <Content Include="Pages\SearchPhoto.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -244,9 +246,9 @@
       <Project>{3FFEF5E3-DCBD-418D-AF06-63CD40B1E229}</Project>
       <Name>Loc</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Logic\Logic.csproj">
+    <ProjectReference Include="..\Logic\LogicContracts.csproj">
       <Project>{CFBC3625-B271-47AB-ADB9-A34D7064D5B7}</Project>
-      <Name>Logic</Name>
+      <Name>LogicContracts</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

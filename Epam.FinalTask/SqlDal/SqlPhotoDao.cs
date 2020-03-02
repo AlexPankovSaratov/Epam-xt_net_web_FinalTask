@@ -111,9 +111,9 @@ namespace SqlDal
                 int LikeAuthorId = 0;
                 while (sqlDataReader.Read())
                 {
-                    if (!System.DBNull.Value.Equals(sqlDataReader["RoleName"]))
+                    if (!System.DBNull.Value.Equals(sqlDataReader["User_Id"]))
                     {
-                        LikeAuthorId = (int)sqlDataReader["RoleName"];
+                        LikeAuthorId = (int)sqlDataReader["User_Id"];
                         LikeUsersList.Add(LikeAuthorId);
                     }
                     if (photo == null)

@@ -19,9 +19,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entiti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlDal", "SqlDal\SqlDal.csproj", "{2DA836FE-F47B-4335-ACA0-8D56D07BD6C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicContracts", "LogicContracts\LogicContracts.csproj", "{FFD4476B-D2CB-420E-B2CA-C45232FB1243}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "LogicContracts\Logic.csproj", "{FFD4476B-D2CB-420E-B2CA-C45232FB1243}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "Logic\Logic.csproj", "{CFBC3625-B271-47AB-ADB9-A34D7064D5B7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicContracts", "Logic\LogicContracts.csproj", "{CFBC3625-B271-47AB-ADB9-A34D7064D5B7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Loc", "Loc\Loc.csproj", "{3FFEF5E3-DCBD-418D-AF06-63CD40B1E229}"
 EndProject

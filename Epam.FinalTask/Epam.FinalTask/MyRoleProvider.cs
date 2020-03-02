@@ -16,25 +16,41 @@ namespace Epam.FinalTask
         {
             UserLogic = DependencyResolver.UserLogic;
         }
-        public static bool VerifUser(string Login, string Password)
+        public static int GetUserId(string Login)
         {
-            if (UserLogic.GetAllUsers().Count() == 0)
-            {
-                //Создаём гостевую учётку
-                UserLogic.AddNewUser("", "",null);
-            }
-            //if (Login == "" && Password != "") return false;
             foreach (User item in UserLogic.GetAllUsers())
             {
                 if (item.Login == Login)
                 {
-                    return item.Password == Password;
+                    return item.Id;
                 }
             }
-            //Первый зарегистрированный пользователь становится админом
-            if (UserLogic.GetAllUsers().Count() == 2 && Login != "" && Password != "") UserLogic.AddNewUser(Login, Password, new HashSet<string> { "Admin" });
-            else UserLogic.AddNewUser(Login, Password,null);
-            return true;
+            return 0;
+        }
+        public static bool VerifUser(string Login, string Password, bool Register)
+        {
+            if (Register)
+            {
+                if (UserLogic.GetAllUsers().Count() == 0)
+                {
+                    //Создаём гостевую учётку
+                    UserLogic.AddNewUser("", "", null);
+                }
+                //Первый зарегистрированный пользователь становится админом
+                if (UserLogic.GetAllUsers().Count() == 2 && Login != "" && Password != "") return UserLogic.AddNewUser(Login, Password, new HashSet<string> { "Admin" });
+                else return UserLogic.AddNewUser(Login, Password, null);
+            }
+            else
+            {
+                foreach (User item in UserLogic.GetAllUsers())
+                {
+                    if (item.Login == Login)
+                    {
+                        return item.Password == Password;
+                    }
+                }
+                return false;
+            }  
         }
         public static bool AddUserRole(int UserId, string RoleName)
         {

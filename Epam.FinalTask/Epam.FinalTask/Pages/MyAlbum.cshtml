@@ -1,9 +1,100 @@
-﻿@{
+﻿@using Entities;
+@using Epam.FinalTask;
+@using Loc;
+@{
+    var largeFileSize = false;
+    string Title = null, Country = null;
+    int Remove = 0;
+    int Like = 0;
+    IEnumerable<Photo> AllPhoto = DependencyResolver.PhotoLogic.GetAllPhoto();
     Layout = "~/Layouts/_MainLayout.cshtml";
-    PageData["Title"] = "My album";
+    int UserId = MyRoleProvider.GetUserId(User.Identity.Name);
+    try
+    {
+        Title = Request["Title"];
+        Country = Request["Country"];
+        if (IsPost && Title != "" & Country != "")
+        {
+            byte[] ByteArrayImage = new byte[] { };
+            WebImage photo = WebImage.GetImageFromRequest();
+            if (photo != null && Title != "" && Country != "")
+            {
+                photo = photo.Resize(Convert.ToInt32(photo.Width * (double)500 / photo.Height), 500);
+                ByteArrayImage = photo.GetBytes();
+                DependencyResolver.PhotoLogic.AddPhoto(Title, Country, ByteArrayImage, UserId);
+            }
+        }
+        Remove = Convert.ToInt32(Request["Remove"]);
+        if(IsPost && Remove != 0)
+        {
+            DependencyResolver.PhotoLogic.RemovePhoto(Remove);
+        }
+        Like = Convert.ToInt32(Request["Like"]);
+        if(IsPost && Like != 0 && UserId != 0)
+        {
+            DependencyResolver.PhotoLogic.LikePhoto(Like, UserId);
+        }
+    }
+    catch (System.Web.HttpException)
+    {
+        largeFileSize = true;
+    }
 }
     <div>
         <h1>My album</h1>
-        <a href="~/Pages/AddNewPhoto.cshtml" class="btn btn-outline-light" role="button" aria-pressed="true">Add new photo</a>
+        <p>
+            @if (largeFileSize)
+            {
+                <div id="my-alert" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Photo size above 16 mb!
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            }
+            <button class="btn btn-outline-light" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                Add new photo
+            </button>
+        </p>
+        <div class="collapse" id="collapseExample">
+            <form method="post" enctype="multipart/form-data" action="~/Pages/MyAlbum">
+                <div class="form-row was-validated">
+                    <div class="col-md-3 mb-3">
+                        <label for="validationServer01">Name</label>
+                        <input type="text" class="form-control" id="validationServer01" placeholder="Enter a name for the photo" required name="Title" value=@Title>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="validationServer02">Country</label>
+                        <input type="text" class="form-control" id="validationServer02" placeholder="Enter the country where this photo was taken" required name="Country" value=@Country>
+                    </div>
+                    <div class="col-md-2 mb-3 custom-file file">
+                        <input type="file" class="custom-file-input" id="validatedCustomFile" required name="Image">
+                        <label class="custom-file-label" for="validatedCustomFile">Choose photo...</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-outline-light">Add</button>
+            </form>
+        </div>
+        @foreach (Photo item in AllPhoto)
+        {
+            if (item.AuthorId == UserId)
+            {
+                <div class="photo">
+                    @item.Title
+                    <br />
+                    <img class="userimage" src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(item.Image))">
+                    <div>
+                        Country: @item.Country
+                    <br />
+                        <form class="photoButton" action="~/Pages/MyAlbum" method="post">
+                            <button type="submit" class="btn btn-outline-light" name="Remove" value=@item.Id>Revome</button>
+                        </form>
+                        <form class="photoButton" action="~/Pages/MyAlbum" method="post">
+                            <button type="submit" class="btn btn-outline-light" name="Like" value=@item.Id>Like : @item.LikeUsersList.Count()</button>
+                        </form>
+                    </div>   
+                </div>
+            }
+        }
     </div>
 
