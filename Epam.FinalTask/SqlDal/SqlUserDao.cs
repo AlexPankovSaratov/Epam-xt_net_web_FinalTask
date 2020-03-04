@@ -1,5 +1,6 @@
 ﻿using DalContracts;
 using Entities;
+using ErrorProcessing;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -72,34 +73,42 @@ namespace SqlDal
 
         public IEnumerable<User> GetAllUsers()
         {
-            HashSet<User> AllUsers = new HashSet<User>();
-            using (SqlConnection con = new SqlConnection(conStr))
+            try
             {
-                SqlCommand cmd = con.CreateCommand();
-                con.Open();
-                cmd.CommandText = "dbo.GetAllUsers";
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                SqlDataReader sqlDataReader = cmd.ExecuteReader();
-                User[] usersAttachment = new User[] { };
-                while (sqlDataReader.Read())
+                HashSet<User> AllUsers = new HashSet<User>();
+                using (SqlConnection con = new SqlConnection(conStr))
                 {
-                    int Id = (int)sqlDataReader["Id"];
-                    string Login = (string)sqlDataReader["Login"];
-                    string Password = (string)sqlDataReader["Password"];
-                    string Role = "";
-                    HashSet<string> Roles = new HashSet<string> { };
-                    if (!System.DBNull.Value.Equals(sqlDataReader["RoleName"]))
+                    SqlCommand cmd = con.CreateCommand();
+                    con.Open();
+                    cmd.CommandText = "dbo.GetAllUsers";
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    SqlDataReader sqlDataReader = cmd.ExecuteReader();
+                    User[] usersAttachment = new User[] { };
+                    while (sqlDataReader.Read())
                     {
-                        Role = (string)sqlDataReader["RoleName"];
-                        Roles.Add(Role);
+                        int Id = (int)sqlDataReader["Id"];
+                        string Login = (string)sqlDataReader["Login"];
+                        string Password = (string)sqlDataReader["Password"];
+                        string Role = "";
+                        HashSet<string> Roles = new HashSet<string> { };
+                        if (!System.DBNull.Value.Equals(sqlDataReader["RoleName"]))
+                        {
+                            Role = (string)sqlDataReader["RoleName"];
+                            Roles.Add(Role);
+                        }
+                        User user = new User { Id = Id, Login = Login, Password = Password, Roles = Roles };
+                        User SerchUser = AllUsers.FirstOrDefault(element => element.Login == user.Login);
+                        if (SerchUser != null && Role != "") SerchUser.Roles.Add(Role);
+                        else AllUsers.Add(user);
                     }
-                    User user = new User { Id = Id, Login = Login, Password = Password, Roles = Roles };
-                    User SerchUser = AllUsers.FirstOrDefault(element => element.Login == user.Login);
-                    if (SerchUser != null && Role != "") SerchUser.Roles.Add(Role);
-                    else AllUsers.Add(user);
                 }
+                return AllUsers;
             }
-            return AllUsers;
+            catch (Exception ex)
+            {
+                Loger.AddLog(ex.Message, ex.StackTrace);
+                return null;
+            }
         }
 
         public User GetUserById(int UserID)

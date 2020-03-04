@@ -128,6 +128,7 @@
     <Content Include="Pages\MyAlbum.cshtml" />
     <Content Include="Pages\SignOut.cshtml" />
     <Content Include="Pages\SearchPhoto.cshtml" />
+    <Content Include="Pages\EditPhoto.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

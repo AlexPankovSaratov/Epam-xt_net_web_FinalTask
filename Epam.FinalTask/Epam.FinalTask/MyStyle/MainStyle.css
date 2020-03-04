@@ -46,3 +46,11 @@ h1 {
 .photoButton {
     display: inline-block;
 }
+.radioButton {
+    padding-left: 18px;
+    padding-bottom: 7px;
+}
+.editFields {
+    display: inline-block;
+    margin-left: 40px;
+}

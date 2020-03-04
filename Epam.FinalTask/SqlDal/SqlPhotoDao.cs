@@ -1,5 +1,6 @@
 ﻿using DalContracts;
 using Entities;
+using ErrorProcessing;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -56,38 +57,81 @@ namespace SqlDal
             return true;
         }
 
-        public IEnumerable<Photo> GetAllPhoto()
+        public bool EditPhoto(int photoId, string newTitle, string newCounry)
         {
-            HashSet<Photo> AllPhoto = new HashSet<Photo>();
             using (SqlConnection con = new SqlConnection(conStr))
             {
                 SqlCommand cmd = con.CreateCommand();
                 con.Open();
-                cmd.CommandText = "dbo.GetAllPhoto";
+                cmd.CommandText = "dbo.EditPhoto";
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                SqlDataReader sqlDataReader = cmd.ExecuteReader();
-                User[] usersAttachment = new User[] { };
-                while (sqlDataReader.Read())
+                var TitleParam = new SqlParameter()
                 {
-                    int Id = (int)sqlDataReader["Id"];
-                    string Title = (string)sqlDataReader["Title"];
-                    string Country = (string)sqlDataReader["Country"];
-                    int AuthorId = (int)sqlDataReader["AuthorId"];
-                    byte[] Image = Convert.FromBase64String((string)sqlDataReader["Image"]);
-                    int LikeAuthorId = 0;
-                    HashSet<int> LikeUsersList = new HashSet<int> { };
-                    if (!System.DBNull.Value.Equals(sqlDataReader["User_Id"]))
-                    {
-                        LikeAuthorId = (int)sqlDataReader["User_Id"];
-                        LikeUsersList.Add(LikeAuthorId);
-                    }
-                    Photo photo = new Photo { Id = Id, Title = Title, Country = Country, AuthorId = AuthorId, LikeUsersList = LikeUsersList, Image = Image };
-                    Photo SerchPhoto = AllPhoto.FirstOrDefault(element => element.Id == photo.Id);
-                    if (SerchPhoto != null && LikeAuthorId != 0) SerchPhoto.LikeUsersList.Add(LikeAuthorId);
-                    else AllPhoto.Add(photo);
-                }
+                    DbType = System.Data.DbType.String,
+                    ParameterName = "@Title",
+                    Value = newTitle,
+                };
+                var CountryParam = new SqlParameter()
+                {
+                    DbType = System.Data.DbType.String,
+                    ParameterName = "@Country",
+                    Value = newCounry,
+                };
+                var IdParam = new SqlParameter()
+                {
+                    DbType = System.Data.DbType.Int32,
+                    ParameterName = "@Id",
+                    Value = photoId,
+                };
+                cmd.Parameters.Add(TitleParam);
+                cmd.Parameters.Add(CountryParam);
+                cmd.Parameters.Add(IdParam);
+
+                cmd.ExecuteNonQuery();
             }
-            return AllPhoto;
+            return true;
+        }
+
+        public IEnumerable<Photo> GetAllPhoto()
+        {
+            try
+            {
+                HashSet<Photo> AllPhoto = new HashSet<Photo>();
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    SqlCommand cmd = con.CreateCommand();
+                    con.Open();
+                    cmd.CommandText = "dbo.GetAllPhoto";
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    SqlDataReader sqlDataReader = cmd.ExecuteReader();
+                    User[] usersAttachment = new User[] { };
+                    while (sqlDataReader.Read())
+                    {
+                        int Id = (int)sqlDataReader["Id"];
+                        string Title = (string)sqlDataReader["Title"];
+                        string Country = (string)sqlDataReader["Country"];
+                        int AuthorId = (int)sqlDataReader["AuthorId"];
+                        byte[] Image = Convert.FromBase64String((string)sqlDataReader["Image"]);
+                        int LikeAuthorId = 0;
+                        HashSet<int> LikeUsersList = new HashSet<int> { };
+                        if (!System.DBNull.Value.Equals(sqlDataReader["User_Id"]))
+                        {
+                            LikeAuthorId = (int)sqlDataReader["User_Id"];
+                            LikeUsersList.Add(LikeAuthorId);
+                        }
+                        Photo photo = new Photo { Id = Id, Title = Title, Country = Country, AuthorId = AuthorId, LikeUsersList = LikeUsersList, Image = Image };
+                        Photo SerchPhoto = AllPhoto.FirstOrDefault(element => element.Id == photo.Id);
+                        if (SerchPhoto != null && LikeAuthorId != 0) SerchPhoto.LikeUsersList.Add(LikeAuthorId);
+                        else AllPhoto.Add(photo);
+                    }
+                }
+                return AllPhoto;
+            }
+            catch (Exception ex)
+            {
+                Loger.AddLog(ex.Message, ex.StackTrace);
+                return null;
+            } 
         }
 
         public Photo GetPhotoById(int PhotoId)

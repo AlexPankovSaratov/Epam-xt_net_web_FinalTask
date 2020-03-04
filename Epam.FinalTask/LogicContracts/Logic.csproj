@@ -54,6 +54,10 @@
       <Project>{C698CFC9-7185-4ED7-90EB-C936B455F725}</Project>
       <Name>Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Loger\Loger.csproj">
+      <Project>{017505AB-DE9D-43F4-B439-B2EA9A99A2A3}</Project>
+      <Name>Loger</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Logic\LogicContracts.csproj">
       <Project>{CFBC3625-B271-47AB-ADB9-A34D7064D5B7}</Project>
       <Name>LogicContracts</Name>

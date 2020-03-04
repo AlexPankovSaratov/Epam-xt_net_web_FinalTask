@@ -1,5 +1,6 @@
 ﻿using DalContracts;
 using Entities;
+using ErrorProcessing;
 using Logic;
 using System;
 using System.Collections.Generic;
@@ -18,33 +19,35 @@ namespace LogicContracts
         }
         public bool AddNewUser(string Login, string Password, HashSet<string> Roles)
         {
-            if (Login == null || Password == null) return false;
-            foreach (User item in _userDao.GetAllUsers())
-            {
-                if (item.Login == Login) return false;
-            }
-            User user = new User { Login = Login, Password = Password };
-            if (Roles == null) user.Roles = new HashSet<string>();
-            else user.Roles = Roles;
             try
             {
+                if (Login == null || Password == null) return false;
+                foreach (User item in _userDao.GetAllUsers())
+                {
+                    if (item.Login == Login) return false;
+                }
+                User user = new User { Login = Login, Password = Password };
+                if (Roles == null) user.Roles = new HashSet<string>();
+                else user.Roles = Roles;
                 return _userDao.AddNewUser(user);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Loger.AddLog(ex.Message, ex.StackTrace);
                 return false;
             }
         }
 
         public bool AddUserRole(int UserID, string RoleName)
-        {
-            if (UserID == 0 || RoleName == null || RoleName == "") return false;
+        {  
             try
             {
+                if (UserID == 0 || RoleName == null || RoleName == "") return false;
                 return _userDao.AddUserRole(UserID, RoleName);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Loger.AddLog(ex.Message, ex.StackTrace);
                 return false;
             }
         }
@@ -59,7 +62,15 @@ namespace LogicContracts
 
         public User GetUserById(int UserID)
         {
-            return _userDao.GetUserById(UserID);
+            try
+            {
+                return _userDao.GetUserById(UserID);
+            }
+            catch (Exception ex)
+            {
+                Loger.AddLog(ex.Message, ex.StackTrace);
+                return null;
+            }
         }
     }
 }

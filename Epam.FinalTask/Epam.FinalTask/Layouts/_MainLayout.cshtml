@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width" />
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/MyStyle/MainStyle.css" rel="stylesheet" />
-    <title>>@PageData["Title"]</title>
+    <title>@PageData["Title"]</title>
 </head>
 <body>
     @if (User.Identity.IsAuthenticated)
@@ -64,8 +64,8 @@
     <div class="content">
         @RenderBody()
     </div>
-    <script src="~/MyScript/MainJS.js"></script>
     <script src="~/Scripts/jquery-3.4.1.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/MyScript/MainJS.js"></script>
 </body>
 </html>

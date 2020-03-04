@@ -1,4 +1,6 @@
-﻿@using Epam.FinalTask;
+﻿@using Entities;
+@using ErrorProcessing;
+@using Epam.FinalTask;
 @using Loc;
 @{
     string Login = null, RoleName = null;
@@ -12,20 +14,40 @@
         DependencyResolver.UserLogic.AddUserRole(UserId, RoleName);
     }
 }
-    <div class="heading container">
-        <h1>Add user role</h1>
-        <form method="post" action="~/Pages/AdminSettings.cshtml">
-            <div class="form-row was-validated">
-                <div class="col-md-3 mb-3">
-                    <label for="validationServer01">User login</label>
-                    <input type="text" class="form-control" id="validationServer01" placeholder="Enter username" required name="Login" value=@Login>
-                </div>
-                <div class="col-md-3 mb-3">
-                    <label for="validationServer02">Role name</label>
-                    <input type="text" class="form-control" id="validationServer02" placeholder="Enter role name" required name="RoleName" value=@RoleName>
-                </div>
+<div class="heading container">
+    <h1>Add user role</h1>
+    <form method="post" action="~/Pages/AdminSettings.cshtml">
+        <div class="form-row was-validated">
+            <div class="col-md-3 mb-3">
+                <label for="validationServer01">User login</label>
+                <input type="text" class="form-control" id="validationServer01" placeholder="Enter username" required name="Login" value=@Login>
             </div>
-            <button type="submit" class="btn btn-outline-light">Add</button>
-        </form>
-    </div>
+            <div class="col-md-3 mb-3">
+                <label for="validationServer02">Role name</label>
+                <input type="text" class="form-control" id="validationServer02" placeholder="Enter role name" required name="RoleName" value=@RoleName>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-outline-light">Add</button>
+    </form>
+</div>
+<h1>Error table</h1>
+<table class="table alert-dark">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Message</th>
+            <th scope="col">StackTrace</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (LogError item in Loger.GetAllLog())
+        {
+            <tr>
+                <th scope="row">@item.Id</th>
+                <td>@item.Message</td>
+                <td>@item.StackTrace</td>
+            </tr>
+        }
+    </tbody>
+</table>
 

@@ -15,5 +15,6 @@ namespace DalContracts
         bool RemovePhoto(int PhotoId);
         bool LikePhoto(int PhotoId, int LikedUserId);
         bool RemoveLikePhoto(int PhotoId, int LikedUserId);
+        bool EditPhoto(int photoId, string newTitle, string newCounry);
     }
 }

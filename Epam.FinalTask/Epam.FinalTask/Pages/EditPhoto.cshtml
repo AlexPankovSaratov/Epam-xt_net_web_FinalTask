@@ -1,0 +1,44 @@
+﻿@using Entities;
+@using Epam.FinalTask;
+@using Loc;
+@{
+    string NewTitle = null, NewCountry = null;
+    Layout = "~/Layouts/_MainLayout.cshtml";
+    PageData["Title"] = "Edit photo";
+    IEnumerable<Photo> AllPhoto = DependencyResolver.PhotoLogic.GetAllPhoto();
+    int PhotoId = Convert.ToInt32(Request["PhotoId"]);
+    NewTitle = (Request["NewTitle"]);
+    NewCountry = (Request["NewCountry"]);
+    Photo photo = DependencyResolver.PhotoLogic.GetPhotoById(PhotoId);
+    if (NewTitle != null)
+    {
+        NewTitle = NewTitle.Trim();
+    }
+    if (NewCountry != null)
+    {
+        NewCountry = NewCountry.Trim();
+    }
+    if(IsPost && PhotoId != 0 && NewTitle != null && NewCountry != null){
+        DependencyResolver.PhotoLogic.EditPhoto(PhotoId, NewTitle, NewCountry);
+    }
+}
+@if (photo != null)
+{
+    <h1>Edit photo: @photo.Title </h1>
+    <img class="userimage" src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(photo.Image))">
+    <div class="editFields">
+        <form action="~/Pages/EditPhoto.cshtml" method="post">
+            <div>
+                <label for="exampleInputEmail1">New Title</label>
+                <input type="text" class="form-control" placeholder="Enter new title" name="NewTitle" value=@NewTitle>
+                <label for="exampleInputPassword1">New Country</label>
+                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter new country" name="NewCountry" value=@NewCountry>
+                <input type="text" name="PhotoID" value=@PhotoId hidden />
+                <small>Leave the value blank to leave its old value</small>
+            </div>
+            <button type="submit" class="btn btn-outline-light">Save</button>
+        </form>
+    </div>
+   
+}
+

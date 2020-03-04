@@ -1,6 +1,7 @@
 ﻿using DalContracts;
 using Entities;
 using Logic;
+using ErrorProcessing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,15 +18,38 @@ namespace LogicContracts
             _photoDao = photoDao;
         }
         public bool AddPhoto(string Title, string Country, byte[] Image, int AuthorId)
-        {
-            if (Title == null || Country == null || Image == null || AuthorId == 0) return false;
-            Photo photo = new Photo { AuthorId = AuthorId, Country = Country, Image = Image, Title = Title, LikeUsersList = new HashSet<int>() };
+        {   
             try
             {
+                if (Title == null || Country == null || Image == null || AuthorId == 0) return false;
+                Photo photo = new Photo { AuthorId = AuthorId, Country = Country, Image = Image, Title = Title, LikeUsersList = new HashSet<int>() };
                 return _photoDao.AddPhoto(photo);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Loger.AddLog(ex.Message, ex.StackTrace);
+                return false;
+            }
+        }
+
+        public bool EditPhoto(int PhotoId, string NewTitle, string NewCounry)
+        {
+            try
+            {
+                if (PhotoId == 0 || (NewTitle == "" && NewCounry == "")) return false;
+                if(NewTitle == "")
+                {
+                    NewTitle = _photoDao.GetPhotoById(PhotoId).Title;
+                }
+                if (NewCounry == "")
+                {
+                    NewCounry = _photoDao.GetPhotoById(PhotoId).Country;
+                }
+                return _photoDao.EditPhoto(PhotoId, NewTitle, NewCounry);
+            }
+            catch (Exception ex)
+            {
+                Loger.AddLog(ex.Message, ex.StackTrace);
                 return false;
             }
         }
@@ -40,24 +64,49 @@ namespace LogicContracts
 
         public Photo GetPhotoById(int PhotoId)
         {
-            return _photoDao.GetPhotoById(PhotoId);
+            try
+            {
+                if (PhotoId == 0) return null;
+                return _photoDao.GetPhotoById(PhotoId);
+            }
+            catch (Exception ex)
+            {
+                Loger.AddLog(ex.Message, ex.StackTrace);
+                return null;
+            } 
         }
 
         public bool LikePhoto(int PhotoId, int LikedUserId)
         {
-            Photo photo = GetPhotoById(PhotoId);
-            bool UserInArray = false;
-            foreach (int item in photo.LikeUsersList)
+            try
             {
-                if (item == LikedUserId) UserInArray = true;
+                Photo photo = GetPhotoById(PhotoId);
+                bool UserInArray = false;
+                foreach (int item in photo.LikeUsersList)
+                {
+                    if (item == LikedUserId) UserInArray = true;
+                }
+                if (!UserInArray) return _photoDao.LikePhoto(PhotoId, LikedUserId);
+                else return _photoDao.RemoveLikePhoto(PhotoId, LikedUserId);
             }
-            if (!UserInArray) return _photoDao.LikePhoto(PhotoId, LikedUserId);
-            else return _photoDao.RemoveLikePhoto(PhotoId, LikedUserId);
+            catch (Exception ex)
+            {
+                Loger.AddLog(ex.Message, ex.StackTrace);
+                return false;
+            }  
         }
 
         public bool RemovePhoto(int PhotoId)
         {
-            return _photoDao.RemovePhoto(PhotoId);
+            try
+            {
+                return _photoDao.RemovePhoto(PhotoId);
+            }
+            catch (Exception ex)
+            {
+                Loger.AddLog(ex.Message, ex.StackTrace);
+                return false;
+            }
         }
     }
 }

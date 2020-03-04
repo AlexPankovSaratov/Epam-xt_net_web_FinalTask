@@ -3,7 +3,7 @@
 @using Loc;
 @{
     Layout = "~/Layouts/_MainLayout.cshtml";
-    PageData["Title"] = "My album";
+    PageData["Title"] = "All photo";
     IEnumerable<Photo> AllPhoto = DependencyResolver.PhotoLogic.GetAllPhoto();
     int Like = 0;
     int UserId = MyRoleProvider.GetUserId(User.Identity.Name);

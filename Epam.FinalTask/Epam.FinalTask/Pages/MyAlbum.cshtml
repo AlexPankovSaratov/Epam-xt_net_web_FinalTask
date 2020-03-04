@@ -8,6 +8,7 @@
     int Like = 0;
     IEnumerable<Photo> AllPhoto = DependencyResolver.PhotoLogic.GetAllPhoto();
     Layout = "~/Layouts/_MainLayout.cshtml";
+    PageData["Title"] = "My Album";
     int UserId = MyRoleProvider.GetUserId(User.Identity.Name);
     try
     {
@@ -85,7 +86,10 @@
                     <img class="userimage" src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(item.Image))">
                     <div>
                         Country: @item.Country
-                    <br />
+                        <br />
+                        <form class="photoButton" action="~/Pages/EditPhoto.cshtml" method="post">
+                            <button type="submit" class="btn btn-outline-light" name="PhotoId" value=@item.Id>Edit</button>
+                        </form>
                         <form class="photoButton" action="~/Pages/MyAlbum" method="post">
                             <button type="submit" class="btn btn-outline-light" name="Remove" value=@item.Id>Revome</button>
                         </form>

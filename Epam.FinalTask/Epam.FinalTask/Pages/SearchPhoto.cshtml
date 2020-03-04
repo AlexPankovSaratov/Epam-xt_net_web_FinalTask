@@ -3,54 +3,55 @@
 @using Loc;
 @{
     Layout = "~/Layouts/_MainLayout.cshtml";
+    PageData["Title"] = "Search photo";
     IEnumerable<Photo> AllPhoto = DependencyResolver.PhotoLogic.GetAllPhoto();
     int Like = 0;
     int UserId = MyRoleProvider.GetUserId(User.Identity.Name);
     Like = Convert.ToInt32(Request["Like"]);
-    if(IsPost && Like != 0 && UserId != 0)
+    if (IsPost && Like != 0 && UserId != 0)
     {
         DependencyResolver.PhotoLogic.LikePhoto(Like, UserId);
     }
+    if (IsAjax)
+    {
+
+    }
 }
 <h1>Search photo</h1>
-
-<div class="input-group col-md-3 mb-3">
-    <select class="custom-select" id="inputGroupSelect02">
-        <option value="1">Country</option>
-        <option value="2">Author username</option>
-    </select>
-    <div class="input-group-append">
-        <label class="input-group-text" for="inputGroupSelect02">Search by</label>
+<div>
+    <div class="form-group col-md-3 mb-3">
+        <label for="exampleFormControlSelect1">Example select</label>
+        <select class="form-control" id="SearchMode">
+            <option>All photo</option>
+            <option>Author</option>
+            <option>Country</option>
+        </select>
     </div>
-</div>
-
-<div class= "input-group col-md-3 mb-3">
-    <select class="custom-select" id="inputGroupSelect02">
-        <option value="1">Likes</option>
-        <option value="2">Upload date</option>
-    </select>
-    <div class="input-group-append">
-        <label class="input-group-text" for="inputGroupSelect02">Sort by</label>
+    <div class="col-md-3 mb-3">
+        <input type="text" class="form-control" id="SearchValue" placeholder="Enter value for search" required />
     </div>
+    <button id="GoSearch" class="btn btn-outline-light">Search</button>
 </div>
-
-@*@foreach (Photo item in AllPhoto)
+@foreach (Photo item in AllPhoto)
 {
-    <div class="photo">
+    string author = "Author-" + DependencyResolver.UserLogic.GetUserById(item.AuthorId).Login.ToUpper().Trim();
+    string country = "Country-" + item.Country.ToUpper().Trim();
+    <div class="photo @author @country">
         @item.Title
         <br />
         <img class="userimage" src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(item.Image))">
         <div>
+            Author: @DependencyResolver.UserLogic.GetUserById(item.AuthorId).Login |
             Country: @item.Country
             <br />
             @if (User.Identity.Name != "")
             {
-                <form class="photoButton" action="~/Pages/AllPhoto" method="post">
-                    <button type="submit" class="btn btn-outline-light" name="Like" value=@item.Id>Like : @item.LikeUsersList.Count()</button>
+                <form class="photoButton" action="~/Pages/SearchPhoto.cshtml" method="post">
+                    <button id="LikeButton" type="submit" class="btn btn-outline-light" name="Like" value=@item.Id>Like : @item.LikeUsersList.Count()</button>
                 </form>
             }
         </div>
     </div>
-}*@
+}
 
 

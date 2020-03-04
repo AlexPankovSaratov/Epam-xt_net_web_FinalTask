@@ -14,5 +14,6 @@ namespace Logic
         IEnumerable<Photo> GetAllPhoto();
         bool RemovePhoto(int PhotoId);
         bool LikePhoto(int PhotoId, int LikedUserId);
+        bool EditPhoto(int PhotoId, string NewTitle, string NewCounry);
     }
 }
