@@ -93,9 +93,7 @@
                         <form class="photoButton" action="~/Pages/MyAlbum" method="post">
                             <button type="submit" class="btn btn-outline-light" name="Remove" value=@item.Id>Revome</button>
                         </form>
-                        <form class="photoButton" action="~/Pages/MyAlbum" method="post">
-                            <button type="submit" class="btn btn-outline-light" name="Like" value=@item.Id>Like : @item.LikeUsersList.Count()</button>
-                        </form>
+                        <button value="@item.Id" class="LikeButton btn btn-outline-light">Like : <span class="CountLikes">@item.LikeUsersList.Count()</span> </button>
                     </div>   
                 </div>
             }

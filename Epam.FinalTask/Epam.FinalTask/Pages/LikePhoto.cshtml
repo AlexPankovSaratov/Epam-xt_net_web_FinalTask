@@ -1,0 +1,14 @@
+﻿@using Newtonsoft.Json;
+@using Entities;
+@using Epam.FinalTask;
+@using Loc;
+@{
+    if (IsAjax)
+    {
+        int UserId = MyRoleProvider.GetUserId(User.Identity.Name);
+        int ID = Convert.ToInt32(Request["ID"]);
+        DependencyResolver.PhotoLogic.LikePhoto(ID, UserId);
+        int count = DependencyResolver.PhotoLogic.GetPhotoById(ID).LikeUsersList.Count();
+        Response.Write(JsonConvert.SerializeObject(count));
+    }
+}

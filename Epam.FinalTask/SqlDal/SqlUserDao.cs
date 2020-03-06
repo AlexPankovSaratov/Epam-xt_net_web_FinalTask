@@ -146,5 +146,32 @@ namespace SqlDal
             }
             return user;
         }
+
+        public bool RemoveUserRole(int userID, string roleName)
+        {
+            using (SqlConnection con = new SqlConnection(conStr))
+            {
+                SqlCommand cmd = con.CreateCommand();
+                con.Open();
+                cmd.CommandText = "dbo.RemoveUserRole";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                var userIDParam = new SqlParameter()
+                {
+                    DbType = System.Data.DbType.Int32,
+                    ParameterName = "@User_Id",
+                    Value = userID,
+                };
+                var roleNameParam = new SqlParameter()
+                {
+                    DbType = System.Data.DbType.String,
+                    ParameterName = "@RoleName",
+                    Value = roleName,
+                };
+                cmd.Parameters.Add(userIDParam);
+                cmd.Parameters.Add(roleNameParam);
+                cmd.ExecuteNonQuery();
+            }
+            return true;
+        }
     }
 }

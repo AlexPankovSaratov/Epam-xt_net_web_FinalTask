@@ -72,5 +72,19 @@ namespace LogicContracts
                 return null;
             }
         }
+
+        public bool RemoveUserRole(int UserID, string RoleName)
+        {
+            try
+            {
+                if (UserID == 0 || RoleName == null || RoleName == "") return false;
+                return _userDao.RemoveUserRole(UserID, RoleName);
+            }
+            catch (Exception ex)
+            {
+                Loger.AddLog(ex.Message, ex.StackTrace);
+                return false;
+            }
+        }
     }
 }

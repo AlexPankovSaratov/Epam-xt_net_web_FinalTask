@@ -49,6 +49,9 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -121,7 +124,6 @@
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Layouts\_MainLayout.cshtml" />
     <Content Include="index.cshtml" />
-    <Content Include="Pages\AddNewPhoto.cshtml" />
     <Content Include="Pages\AdminSettings.cshtml" />
     <Content Include="Pages\AllPhoto.cshtml" />
     <Content Include="Pages\Login.cshtml" />
@@ -129,6 +131,7 @@
     <Content Include="Pages\SignOut.cshtml" />
     <Content Include="Pages\SearchPhoto.cshtml" />
     <Content Include="Pages\EditPhoto.cshtml" />
+    <Content Include="Pages\LikePhoto.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

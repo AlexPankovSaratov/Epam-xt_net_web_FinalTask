@@ -3,33 +3,55 @@
 @using Epam.FinalTask;
 @using Loc;
 @{
-    string Login = null, RoleName = null;
+    string Login = null, RoleName = null, RemoveLogin = null, RemoveRoleName = null;
     Layout = "~/Layouts/_MainLayout.cshtml";
     PageData["Title"] = "Travel album";
     Login = Request["Login"];
     RoleName = Request["RoleName"];
+    RemoveLogin = Request["RemoveLogin"];
+    RemoveRoleName = Request["RemoveRoleName"];
     if (IsPost && Login != "" && RoleName != "")
     {
         int UserId = MyRoleProvider.GetUserId(Login);
         DependencyResolver.UserLogic.AddUserRole(UserId, RoleName);
     }
+    if (IsPost && RemoveLogin != "" && RemoveRoleName != "")
+    {
+        int UserId = MyRoleProvider.GetUserId(Login);
+        int RemoRoleUserId = MyRoleProvider.GetUserId(RemoveLogin);
+        DependencyResolver.UserLogic.RemoveUserRole(RemoRoleUserId, RemoveRoleName);
+    }
 }
-<div class="heading container">
-    <h1>Add user role</h1>
-    <form method="post" action="~/Pages/AdminSettings.cshtml">
-        <div class="form-row was-validated">
-            <div class="col-md-3 mb-3">
-                <label for="validationServer01">User login</label>
-                <input type="text" class="form-control" id="validationServer01" placeholder="Enter username" required name="Login" value=@Login>
+    <div class="heading container">
+        <h1>Add user role</h1>
+        <form method="post" action="~/Pages/AdminSettings.cshtml">
+            <div class="form-row was-validated">
+                <div class="col-md-3 mb-3">
+                    <label for="validationServer01">User login</label>
+                    <input type="text" class="form-control" id="validationServer01" placeholder="Enter username" required name="Login" value=@Login>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="validationServer02">Role name</label>
+                    <input type="text" class="form-control" id="validationServer02" placeholder="Enter role name" required name="RoleName" value=@RoleName>
+                </div>
             </div>
-            <div class="col-md-3 mb-3">
-                <label for="validationServer02">Role name</label>
-                <input type="text" class="form-control" id="validationServer02" placeholder="Enter role name" required name="RoleName" value=@RoleName>
+            <button type="submit" class="btn btn-outline-light">Add</button>
+        </form>
+        <h1>Remove user role</h1>
+        <form method="post" action="~/Pages/AdminSettings.cshtml">
+            <div class="form-row was-validated">
+                <div class="col-md-3 mb-3">
+                    <label for="validationServer01">User login</label>
+                    <input type="text" class="form-control" id="validationServer01" placeholder="Enter username" required name="RemoveLogin" value=@RemoveLogin>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label for="validationServer02">Role name</label>
+                    <input type="text" class="form-control" id="validationServer02" placeholder="Enter role name" required name="RemoveRoleName" value=@RemoveRoleName>
+                </div>
             </div>
-        </div>
-        <button type="submit" class="btn btn-outline-light">Add</button>
-    </form>
-</div>
+            <button type="submit" class="btn btn-outline-light">Remove</button>
+        </form>
+    </div>
 <h1>Error table</h1>
 <table class="table alert-dark">
     <thead>

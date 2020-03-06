@@ -13,5 +13,6 @@ namespace DalContracts
         IEnumerable<User> GetAllUsers();
         bool AddUserRole(int UserID, string RoleName);
         bool AddNewUser(User NewUser);
+        bool RemoveUserRole(int userID, string roleName);
     }
 }

@@ -18,7 +18,7 @@ namespace LogicContracts
             _photoDao = photoDao;
         }
         public bool AddPhoto(string Title, string Country, byte[] Image, int AuthorId)
-        {   
+        {
             try
             {
                 if (Title == null || Country == null || Image == null || AuthorId == 0) return false;
@@ -30,7 +30,7 @@ namespace LogicContracts
                 Loger.AddLog(ex.Message, ex.StackTrace);
                 return false;
             }
-        }
+}
 
         public bool EditPhoto(int PhotoId, string NewTitle, string NewCounry)
         {

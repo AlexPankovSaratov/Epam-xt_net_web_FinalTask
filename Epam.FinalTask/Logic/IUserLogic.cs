@@ -12,6 +12,7 @@ namespace Logic
         User GetUserById(int UserID);
         IEnumerable<User> GetAllUsers();
         bool AddUserRole(int UserID, string RoleName);
+        bool RemoveUserRole(int UserID, string RoleName);
         bool AddNewUser(string Login, string Password, HashSet<string> Roles);
     }
 }
