@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SqlCommentDao.cs" />
     <Compile Include="SqlUserDao.cs" />
     <Compile Include="SqlPhotoDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

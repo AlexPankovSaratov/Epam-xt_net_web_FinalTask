@@ -47,6 +47,9 @@
             @if (User.Identity.Name != "")
             {
                 <button value="@item.Id" class="LikeButton btn btn-outline-light">Like : <span class="CountLikes">@item.LikeUsersList.Count()</span> </button>
+                <form class="photoButton" action="~/Pages/CommentPhoto.cshtml" method="post">
+                    <button type="submit" class="btn btn-outline-light" name="PhotoId" value=@item.Id>Go to comments</button>
+                </form>
             }
         </div>
     </div>

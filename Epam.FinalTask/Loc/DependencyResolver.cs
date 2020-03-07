@@ -21,5 +21,10 @@ namespace Loc
         public static IPhotoDao PhotoDao => _photoDao ?? (_photoDao = new SqlPhotoDao());
         private static IPhotoLogic _photoLogic;
         public static IPhotoLogic PhotoLogic => _photoLogic ?? (_photoLogic = new PhotoLogic(PhotoDao));
+
+        private static ICommentDao _commentDao;
+        public static ICommentDao CommentDao => _commentDao ?? (_commentDao = new SqlCommentDao());
+        private static ICommentLogic _commentLogic;
+        public static ICommentLogic CommentLogic => _commentLogic ?? (_commentLogic = new CommentLogic(CommentDao));
     }
 }

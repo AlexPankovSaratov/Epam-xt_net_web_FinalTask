@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ICommentLogic.cs" />
     <Compile Include="IUserLogic.cs" />
     <Compile Include="IPhotoLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,0 +1,48 @@
+﻿@using Entities;
+@using Epam.FinalTask;
+@using Loc;
+@{
+    string Comment = null;
+    Layout = "~/Layouts/_MainLayout.cshtml";
+    PageData["Title"] = "Comment photo";
+    IEnumerable<Photo> AllPhoto = DependencyResolver.PhotoLogic.GetAllPhoto();
+    int PhotoId = Convert.ToInt32(Request["PhotoId"]);
+    Comment = (Request["Comment"]);
+    Photo photo = DependencyResolver.PhotoLogic.GetPhotoById(PhotoId);
+    if (Comment != null)
+    {
+        Comment = Comment.Trim();
+    }
+    if (IsPost && PhotoId != 0 && Comment != null)
+    {
+        DependencyResolver.CommentLogic.AddComment(PhotoId, User.Identity.Name, Comment);
+    }
+    if (photo != null)
+    {
+        <h1>Comment photo</h1>
+        <div style="text-align:center; padding: 10px;">
+            <img class="userimage" src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(photo.Image))">
+        </div>
+        foreach (Comment item in DependencyResolver.CommentLogic.GetAllCommentPhoto(PhotoId))
+        {
+            <div>
+                @item.TextComment
+                <br />
+                Author: @item.Author
+            </div>
+        }
+        <form action="~/Pages/CommentPhoto.cshtml" method="post">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">New comment</span>
+                    </div>
+                    <textarea class="form-control" aria-label="With textarea" name="Comment" value=@Comment></textarea>
+                </div>
+                <input type="text" name="PhotoID" value=@PhotoId hidden />
+            </div>
+            <button type="submit" class="btn btn-outline-light">Add comment</button>
+        </form>
+        }
+    }
+

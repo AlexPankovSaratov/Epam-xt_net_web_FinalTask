@@ -2,12 +2,6 @@
     location.href = '/Pages/SignOut';
 });
 
-//$(".LikeButton").click(function () {
-//    let val = $(this).attr("value");
-//    var countLikes = $.post('/Pages/LikePhoto.cshtml', { Id: val }).responseText;
-//    $(this).children(".CountLikes").html(countLikes);
-//})
-
 $(".LikeButton").click(function () {
     let val = $(this).attr("value");
     var button = $(this);

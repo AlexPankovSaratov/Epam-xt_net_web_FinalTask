@@ -90,6 +90,9 @@
                         <form class="photoButton" action="~/Pages/EditPhoto.cshtml" method="post">
                             <button type="submit" class="btn btn-outline-light" name="PhotoId" value=@item.Id>Edit</button>
                         </form>
+                        <form class="photoButton" action="~/Pages/CommentPhoto.cshtml" method="post">
+                            <button type="submit" class="btn btn-outline-light" name="PhotoId" value=@item.Id>Go to comments</button>
+                        </form>
                         <form class="photoButton" action="~/Pages/MyAlbum" method="post">
                             <button type="submit" class="btn btn-outline-light" name="Remove" value=@item.Id>Revome</button>
                         </form>
