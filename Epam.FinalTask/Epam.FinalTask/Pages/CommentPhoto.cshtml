@@ -7,6 +7,7 @@
     PageData["Title"] = "Comment photo";
     IEnumerable<Photo> AllPhoto = DependencyResolver.PhotoLogic.GetAllPhoto();
     int PhotoId = Convert.ToInt32(Request["PhotoId"]);
+    int RemoveCommentID = Convert.ToInt32(Request["RemoveCommentID"]);
     Comment = (Request["Comment"]);
     Photo photo = DependencyResolver.PhotoLogic.GetPhotoById(PhotoId);
     if (Comment != null)
@@ -17,18 +18,29 @@
     {
         DependencyResolver.CommentLogic.AddComment(PhotoId, User.Identity.Name, Comment);
     }
+    if (IsPost && RemoveCommentID != 0)
+    {
+        DependencyResolver.CommentLogic.RemoveComment(RemoveCommentID);
+    }
     if (photo != null)
     {
         <h1>Comment photo</h1>
-        <div style="text-align:center; padding: 10px;">
+        <div class="commentTitle">
             <img class="userimage" src="@String.Format("data:image/jpg;base64,{0}", Convert.ToBase64String(photo.Image))">
         </div>
         foreach (Comment item in DependencyResolver.CommentLogic.GetAllCommentPhoto(PhotoId))
         {
-            <div>
+            <div class="comment">
                 @item.TextComment
                 <br />
                 Author: @item.Author
+                @if (item.Author == User.Identity.Name || DependencyResolver.UserLogic.GetUserById(photo.AuthorId).Login == User.Identity.Name || User.IsInRole("Admin"))
+                {
+                    <form class="photoButton" action="~/Pages/CommentPhoto.cshtml" method="post">
+                        <button type="submit" class="btn btn-outline-light" name="RemoveCommentID" value=@item.ID>Revome</button>
+                        <input type="text" name="PhotoID" value=@PhotoId hidden />
+                    </form>
+                }
             </div>
         }
         <form action="~/Pages/CommentPhoto.cshtml" method="post">
@@ -43,6 +55,6 @@
             </div>
             <button type="submit" class="btn btn-outline-light">Add comment</button>
         </form>
-        }
     }
+}
 
