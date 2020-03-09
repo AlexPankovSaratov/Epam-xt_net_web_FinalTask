@@ -1,4 +1,6 @@
 ﻿using Entities;
+using log4net;
+using log4net.Config;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -9,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ErrorProcessing
 {
-    public class Loger
+    public class MyLogger
     {
         private static string conStr = ConfigurationManager.ConnectionStrings["db"].ConnectionString;
         public static void AddLog(string Message, string StackTrace)
@@ -56,6 +58,19 @@ namespace ErrorProcessing
                 }
             }
                 return AllError;
+        }
+    }
+    public static class Logger
+    {
+        static Logger()
+        {
+            InitLogger();
+        }
+        public static ILog Log { get; } = LogManager.GetLogger("LOGGER");
+
+        public static void InitLogger()
+        {
+            XmlConfigurator.Configure();
         }
     }
 }

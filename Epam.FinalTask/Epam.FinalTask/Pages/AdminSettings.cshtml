@@ -62,7 +62,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (LogError item in Loger.GetAllLog())
+        @foreach (LogError item in MyLogger.GetAllLog())
         {
             <tr>
                 <th scope="row">@item.Id</th>

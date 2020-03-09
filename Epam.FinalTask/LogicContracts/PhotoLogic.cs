@@ -27,10 +27,11 @@ namespace LogicContracts
             }
             catch (Exception ex)
             {
-                Loger.AddLog(ex.Message, ex.StackTrace);
+                MyLogger.AddLog(ex.Message, ex.StackTrace);
+                Logger.Log.Error(ex.Message);
                 return false;
             }
-}
+        }
 
         public bool EditPhoto(int PhotoId, string NewTitle, string NewCounry)
         {
@@ -49,7 +50,8 @@ namespace LogicContracts
             }
             catch (Exception ex)
             {
-                Loger.AddLog(ex.Message, ex.StackTrace);
+                MyLogger.AddLog(ex.Message, ex.StackTrace);
+                Logger.Log.Error(ex.Message);
                 return false;
             }
         }
@@ -71,7 +73,8 @@ namespace LogicContracts
             }
             catch (Exception ex)
             {
-                Loger.AddLog(ex.Message, ex.StackTrace);
+                MyLogger.AddLog(ex.Message, ex.StackTrace);
+                Logger.Log.Error(ex.Message);
                 return null;
             } 
         }
@@ -91,7 +94,8 @@ namespace LogicContracts
             }
             catch (Exception ex)
             {
-                Loger.AddLog(ex.Message, ex.StackTrace);
+                MyLogger.AddLog(ex.Message, ex.StackTrace);
+                Logger.Log.Error(ex.Message);
                 return false;
             }  
         }
@@ -104,7 +108,8 @@ namespace LogicContracts
             }
             catch (Exception ex)
             {
-                Loger.AddLog(ex.Message, ex.StackTrace);
+                MyLogger.AddLog(ex.Message, ex.StackTrace);
+                Logger.Log.Error(ex.Message);
                 return false;
             }
         }

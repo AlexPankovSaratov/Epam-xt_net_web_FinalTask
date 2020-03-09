@@ -77,7 +77,8 @@ namespace SqlDal
             }
             catch (Exception ex)
             {
-                Loger.AddLog(ex.Message, ex.StackTrace);
+                MyLogger.AddLog(ex.Message, ex.StackTrace);
+                Logger.Log.Error(ex.Message);
                 return null;
             }
         }

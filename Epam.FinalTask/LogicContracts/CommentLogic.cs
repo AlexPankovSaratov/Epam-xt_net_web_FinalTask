@@ -28,7 +28,8 @@ namespace LogicContracts
             }
             catch (Exception ex)
             {
-                Loger.AddLog(ex.Message, ex.StackTrace);
+                MyLogger.AddLog(ex.Message, ex.StackTrace);
+                Logger.Log.Error(ex.Message);
                 return false;
             }
         }
@@ -50,7 +51,8 @@ namespace LogicContracts
             }
             catch (Exception ex)
             {
-                Loger.AddLog(ex.Message, ex.StackTrace);
+                MyLogger.AddLog(ex.Message, ex.StackTrace);
+                Logger.Log.Error(ex.Message);
                 return false;
             }
         }
